@@ -1,6 +1,6 @@
-# Chatbot IA de Atendimento
+# Chatbot IA de Atendimento via Whatsapp
 
-Projeto de chatbot inteligente para automação de atendimento, integrando IA com interface web.
+Projeto de chatbot inteligente para automação de atendimento, integrando IA com interface web e comunicação via WhatsApp.
 
 ---
 
@@ -12,11 +12,30 @@ Projeto de chatbot inteligente para automação de atendimento, integrando IA co
 
 ---
 
+## Funcionalidades
+
+- Atendimento automático com IA
+- Respostas baseadas em regras (horário, serviços, localização)
+- Integração com WhatsApp (Twilio Sandbox)
+- Interface web estilo chat
+- Memória de conversa por usuário
+- Fallback inteligente com IA (Groq)
+
+---
+
+## Fluxo do Sistema
+
+Usuário → WhatsApp → Twilio → FastAPI → IA → resposta → WhatsApp
+
+---
+
 ## Tecnologias
 - Python
 - FastAPI
 - HTML, CSS, JavaScript
 - Groq API
+- Twilio API
+- ngrok
 
 ---
 
@@ -50,15 +69,25 @@ source .venv/bin/activate
 ### 4. Instalar dependências
 
 ```bash
-pip install fastapi uvicorn python-dotenv groq
+pip install -r requirements.txt
 ```
 
-### 5. Rodar backend
+### 5. Criar um arquivo .env
+GROQ_API_KEY=sua_chave_aqui
+
+### 6. Rodar backend
 
 ```bash
 uvicorn main:app --reload
 ```
 
-### 6. Rodar frontend
+### 7. Expor servidor (ngrok)
 
-Abrir index.html com Live Server
+ngrok http 8000
+
+### 8. Configurar Twilio
+
+- Acesse o painel do Twilio
+- Vá em "Send a WhatsApp message"
+- Configure o seu webhook:
+https://SEU_NGROK/whatsapp

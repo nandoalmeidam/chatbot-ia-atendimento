@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
+from fastapi.responses import Response
+from twilio.twiml.messaging_response import MessagingResponse
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
@@ -101,7 +103,14 @@ def gerar_resposta(pergunta, usuario):
         return "Desculpe, tivemos um problema ao processar sua mensagem. Pode tentar novamente?"
 
 # Endpoint
-@app.post("/chat")
-def chat(msg: Mensagem):
-    resposta = gerar_resposta(msg.texto, msg.usuario)
-    return {"resposta": resposta}
+@app.post("/whatsapp")
+async def whatsapp(Body: str = Form(...)):
+    resposta_texto = gerar_resposta(Body, "whatsapp_user")
+
+    resp = MessagingResponse()
+    resp.message(resposta_texto)
+
+    return Response(
+        content=str(resp),
+        media_type="application/xml"
+    )

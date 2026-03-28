@@ -1,3 +1,25 @@
+# Ambiente virtual
 .venv/
-__pycache__/
+
+# Arquivos de ambiente (chaves)
 .env
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# ngrok (se estiver na pasta)
+ngrok.exe
+
+# arquivos temporários
+*.tmp
