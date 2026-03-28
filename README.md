@@ -1,6 +1,6 @@
 # Chatbot IA de Atendimento via Whatsapp
 
-Projeto de chatbot inteligente para automação de atendimento, integrando IA com interface web e comunicação via WhatsApp.
+Sistema de atendimento automatizado com IA integrado ao WhatsApp, capaz de responder clientes em tempo real utilizando regras e inteligência artificial.
 
 ---
 
@@ -20,6 +20,15 @@ Projeto de chatbot inteligente para automação de atendimento, integrando IA co
 - Interface web estilo chat
 - Memória de conversa por usuário
 - Fallback inteligente com IA (Groq)
+
+---
+
+## 💡 Diferenciais
+
+- Integração real com WhatsApp (não é simulação)
+- Uso de IA com fallback inteligente
+- Estrutura pronta para produção
+- Fácil adaptação para empresas reais
 
 ---
 
@@ -72,14 +81,21 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 5. Criar um arquivo .env
+### 5. Criar arquivo .env
+
+Crie um arquivo chamado `.env` na raiz do projeto:
+
+```env
 GROQ_API_KEY=sua_chave_aqui
+```
 
 ### 6. Rodar backend
 
 ```bash
 uvicorn main:app --reload
 ```
+Acesse: 
+http://127.0.0.1:8000/docs
 
 ### 7. Expor servidor (ngrok)
 
@@ -91,3 +107,4 @@ ngrok http 8000
 - Vá em "Send a WhatsApp message"
 - Configure o seu webhook:
 https://SEU_NGROK/whatsapp
+- Método: POST
