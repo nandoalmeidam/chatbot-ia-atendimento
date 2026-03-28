@@ -1,23 +1,64 @@
-# Chatbot IA - Projeto
+# Chatbot IA de Atendimento
 
-## Como rodar o projeto
+Sistema de atendimento automático com IA usando FastAPI + interface estilo WhatsApp.
 
-### 1. Ativar ambiente virtual
-No terminal digitar:
+---
 
+## Preview do Sistema
+
+<p align="center">
+  <img src="assets/chat.png" width="300"/>
+</p>
+
+---
+
+## Tecnologias
+- Python
+- FastAPI
+- HTML, CSS, JavaScript
+- Groq API
+
+---
+
+## Como rodar
+
+### 1. Clonar o projeto
+
+```bash
+git clone https://github.com/nandoalmeidam/chatbot-ia-atendimento
+cd chatbot-ia-atendimento
+```
+
+### 2. Criar ambiente virtual
+
+```bash
+python -m venv .venv
+```
+
+### 3. Ativar ambiente
+
+## Windows:
+```bash
 .venv\Scripts\activate
+```
 
+## Mac/Linux:
+```bash
+source .venv/bin/activate
+```
 
-### 2. Subir backend
-No terminal digitar:
+### 4. Instalar dependências
 
+```bash
+pip install fastapi uvicorn python-dotenv groq
+```
+
+### 5. Rodar backend
+
+```bash
 uvicorn main:app --reload
+```
 
+### 6. Rodar frontend
 
-### 3. Abrir frontend
-- Abrir index.html com Live Server
-
-## Importante
-- Backend precisa estar rodando sempre
-
-
+Abrir index.html com Live Server
