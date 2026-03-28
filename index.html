@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot IA</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #ece5dd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 350px;
+      height: 600px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .chat-header {
+      background: #075e54;
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+      max-width: 75%;
+      word-wrap: break-word;
+    }
+
+    .user {
+      background: #dcf8c6;
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: #f1f0f0;
+      align-self: flex-start;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #eee;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 10px;
+      background: #25d366;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1ebe5d;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+  <div class="chat-header">
+    Atendimento IA
+  </div>
+
+  <div class="chat-messages" id="messages"></div>
+
+  <div class="chat-input">
+    <input type="text" id="input" placeholder="Digite sua mensagem..." onkeypress="if(event.key==='Enter') enviar()">
+    <button onclick="enviar()">Enviar</button>
+  </div>
+
+</div>
+
+<script>
+
+  const USUARIO_ID = "nando"; // 🔥 memória por usuário
+
+  async function enviar() {
+    const input = document.getElementById("input");
+    const mensagem = input.value;
+
+    if (!mensagem) return;
+
+    adicionarMensagem(mensagem, "user");
+    input.value = "";
+
+    // 👇 mostra "digitando..."
+    const digitando = adicionarMensagem("Digitando...", "bot");
+
+    try {
+      const resposta = await fetch("http://127.0.0.1:8000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          texto: mensagem,
+          usuario: USUARIO_ID
+        })
+      });
+
+      const data = await resposta.json();
+
+      // remove "digitando..."
+      digitando.remove();
+
+      adicionarMensagem(data.resposta, "bot");
+
+    } catch (error) {
+      digitando.remove();
+      adicionarMensagem("Erro ao conectar com o servidor.", "bot");
+      console.error(error);
+    }
+  }
+
+  function adicionarMensagem(texto, tipo) {
+    const container = document.getElementById("messages");
+
+    const msg = document.createElement("div");
+    msg.classList.add("message", tipo);
+    msg.innerText = texto;
+
+    container.appendChild(msg);
+
+    // scroll automático
+    container.scrollTop = container.scrollHeight;
+
+    return msg;
+  }
+
+</script>
+
+</body>
+</html>
