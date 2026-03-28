@@ -1,6 +1,6 @@
 # Chatbot IA de Atendimento
 
-Sistema de atendimento automático com IA usando FastAPI + interface estilo WhatsApp.
+Projeto de chatbot inteligente para automação de atendimento, integrando IA com interface web.
 
 ---
 
